@@ -1,0 +1,26 @@
+import { drizzle } from 'drizzle-orm/neon-http';
+import { neon } from '@neondatabase/serverless';
+import * as dotenv from 'dotenv';
+import { users } from './src/db/schema';
+
+dotenv.config();
+
+const sql = neon(process.env.DATABASE_URL!);
+const db = drizzle(sql, { schema: { users } });
+
+const seed = async () => {
+  const sampleUsers = [
+    { id: '1001', balance: 1000, referredBy: null },
+    { id: '1002', balance: 1500, referredBy: '1001' },
+    { id: '1003', balance: 800, referredBy: '1001' },
+    { id: '1004', balance: 1200, referredBy: '1002' },
+  ];
+
+  for (const user of sampleUsers) {
+    await db.insert(users).values(user).onConflictDoNothing().run();
+  }
+
+  console.log('✅ Seed complete.');
+};
+
+seed().catch(console.error);

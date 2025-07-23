@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS users (
+  id TEXT PRIMARY KEY,
+  balance INTEGER DEFAULT 1000,
+  referred_by TEXT,
+  created_at TIMESTAMP DEFAULT NOW()
+);
