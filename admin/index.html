@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html><body>
+<h2>Admin Login</h2>
+<form id="loginForm">
+  <input name="username" placeholder="Username" /><br/>
+  <input name="password" type="password" placeholder="Password" /><br/>
+  <button type="submit">Login</button>
+</form>
+<script>
+document.getElementById('loginForm').onsubmit = async (e) => {
+  e.preventDefault();
+  const res = await fetch('/admin/login', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      username: e.target.username.value,
+      password: e.target.password.value
+    })
+  });
+  const data = await res.json();
+  if (data.token) localStorage.setItem('token', data.token);
+  alert('Login successful');
+};
+</script>
+</body></html>
