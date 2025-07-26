@@ -38,4 +38,8 @@ app.post('/admin/users/:id/pay', async (req, res) => {
   res.json({ ok: true });
 });
 
+app.get('/', (req, res) => {
+  res.send('✅ BUUNIX Admin Backend is Live');
+});
+
 app.listen(3000, () => console.log('🌐 Admin API running on port 3000'));

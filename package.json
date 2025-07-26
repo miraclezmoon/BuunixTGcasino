@@ -1,4 +1,11 @@
 {
+  "name": "buunixtgcasino",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "db:migrate": "set DATABASE_URL=%DATABASE_URL% && npx drizzle-kit push --config drizzle.config.ts",
+    "db:generate": "set DATABASE_URL=%DATABASE_URL% && npx drizzle-kit generate --config drizzle.config.ts"
+  },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.1",
     "dotenv": "^17.2.0",
@@ -7,5 +14,9 @@
     "jsonwebtoken": "^9.0.2",
     "node-telegram-bot-api": "^0.66.0",
     "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.4",
+    "tsx": "^4.20.3"
   }
 }
